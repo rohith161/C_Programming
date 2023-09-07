@@ -197,27 +197,18 @@ int find(LinkedList* list, int object){
 
 /* reverse the elements in the list*/
 void reverse(LinkedList* list){
-    int* arr = malloc(sizeof(int) * getSize(list));
-    if (arr == NULL) {
-        perror("\nMemory allocation failed\n");
-        exit(EXIT_FAILURE);
-    }
+    Node *prev = NULL, *current = list->node;
 
-    Node* current = list->node;
-    for (int i = 0; i < getSize(list); i++) {
-        arr[i] = current->data;
-        current = current->next;
+    while(current != NULL){
+    Node* next = current->next;
+    current->next = prev;
+    prev = current;
+    current = next;
     }
+    list->node = prev;
+    
+    free(current);
 
-    // Copy the values back into the linked list
-    current = list->node;
-    for (int i = getSize(list)-1; i>=0;  i--) {
-        current->data = arr[i];
-        current = current->next;
-    }
-
-    // Free the temporary array
-    free(arr);
 }
 int main() {
     LinkedList* list = initLinkedList();
