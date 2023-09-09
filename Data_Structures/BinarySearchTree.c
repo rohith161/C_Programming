@@ -27,7 +27,8 @@ Node* createNode(int data){
         exit(EXIT_FAILURE);
     }
     newNode->data = data;
-    newNode->left = newNode->right = NULL;
+    newNode->left = NULL;
+    newNode->right = NULL;
     return newNode;
 }
 
@@ -40,14 +41,14 @@ void insert(BinarySearchTree* root, int data){
     Node* current = root->node;
     while (1)
     {
-        if(current->data <= data){
+        if(data <= current->data){
             if(current->left == NULL){
                 current->left = newNode;
                 return;
             }
             current = current->left;
         }
-        else{
+        else {
             if(current->right == NULL){
                 current->right = newNode;
                 return;
@@ -79,17 +80,38 @@ int search(BinarySearchTree* root, int data){
     }
     return 0;
 }
+int findMin(BinarySearchTree* root){
+    Node* current = root->node;
+    while (current->left != NULL)
+    {
+        current = current->left;
+    }
+    
+    return current->data;
+}
+int findMax(BinarySearchTree* root){
+    Node* current = root->node;
+    while (current->right != NULL)
+    {
+        current = current->right;
+    }
+    
+    return current->data;
+}
 int main(){
     BinarySearchTree* b = init_BinarySearchTree();
     insert(b,15);
     insert(b,10);
     insert(b,20);
     insert(b,25);
-    insert(b,14);
+    insert(b,14);insert(b,8);
     printf("\n%s",(search(b,15)) ? "FOUND" : "NOT FOUND");
     printf("\n%s",(search(b,10)) ? "FOUND" : "NOT FOUND");
     printf("\n%s",(search(b,20)) ? "FOUND" : "NOT FOUND");
     printf("\n%s",(search(b,25)) ? "FOUND" : "NOT FOUND");
     printf("\n%s",(search(b,11)) ? "FOUND" : "NOT FOUND");
+    printf("\n%d",findMin(b));
+    printf("\n%d",findMax(b));
+    
     return 0;
 }
