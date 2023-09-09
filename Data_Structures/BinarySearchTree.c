@@ -81,6 +81,10 @@ int search(BinarySearchTree* root, int data){
     return 0;
 }
 int findMin(BinarySearchTree* root){
+    if(root->node == NULL){
+        printf("\nEmpty Tree\n");
+        return -1;
+    }
     Node* current = root->node;
     while (current->left != NULL)
     {
@@ -90,6 +94,10 @@ int findMin(BinarySearchTree* root){
     return current->data;
 }
 int findMax(BinarySearchTree* root){
+    if(root->node == NULL){
+        printf("\nEmpty Tree\n");
+        return -1;
+    }
     Node* current = root->node;
     while (current->right != NULL)
     {
