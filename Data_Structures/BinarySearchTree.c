@@ -80,6 +80,19 @@ int search(BinarySearchTree* root, int data){
     }
     return 0;
 }
+
+// recurrsion method
+// int findMin(Node* root){
+//     if(root == NULL){
+//         printf("\nEmpty Tree\n");
+//         return -1;
+//     }
+//     else if(root->left == NULL){
+//         return root->data;
+//     }
+//     return findMin(root->left);
+    
+// }
 int findMin(BinarySearchTree* root){
     if(root->node == NULL){
         printf("\nEmpty Tree\n");
@@ -119,6 +132,7 @@ int main(){
     printf("\n%s",(search(b,25)) ? "FOUND" : "NOT FOUND");
     printf("\n%s",(search(b,11)) ? "FOUND" : "NOT FOUND");
     printf("\n%d",findMin(b));
+    //printf("\n%d",findMin(b->node));
     printf("\n%d",findMax(b));
     
     return 0;
