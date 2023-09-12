@@ -9,7 +9,7 @@ void levelOrderTraversal(Link* root) {
     enQueue(Q, (Link*)root);
     while (!isEmpty(Q)) {
         Link* current = (Link*)Peek(Q);
-        printf("%s ", current->data);
+        printf("%s ",current->data);
         if (current->left != NULL) {
             enQueue(Q, (Link*)current->left);
         }
@@ -39,6 +39,7 @@ int main(){
     printf("\n%s",findMin(b->node));
     printf("\n%s",findMax(b));
     printf("\nheight -- > %d",findHeight(b->node));
+    printf("\n");
     levelOrderTraversal(b->node);
     
     return 0;
