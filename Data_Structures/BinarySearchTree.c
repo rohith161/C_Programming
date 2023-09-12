@@ -80,31 +80,16 @@ int search(BinarySearchTree* root, int data){
     }
     return 0;
 }
-
-// recurrsion method
-// int findMin(Node* root){
-//     if(root == NULL){
-//         printf("\nEmpty Tree\n");
-//         return -1;
-//     }
-//     else if(root->left == NULL){
-//         return root->data;
-//     }
-//     return findMin(root->left);
-    
-// }
-int findMin(BinarySearchTree* root){
-    if(root->node == NULL){
+int findMin(Node* root){
+    if(root == NULL){
         printf("\nEmpty Tree\n");
         return -1;
     }
-    Node* current = root->node;
-    while (current->left != NULL)
-    {
-        current = current->left;
+    else if(root->left == NULL){
+        return root->data;
     }
+    return findMin(root->left);
     
-    return current->data;
 }
 int findMax(BinarySearchTree* root){
     if(root->node == NULL){
@@ -142,11 +127,20 @@ void preOrderrecurrceive(Node* root){
     preOrderrecurrceive(root->left);
     preOrderrecurrceive(root->right);
 }
+void postOrderrecurrceive(Node* root){
+    if(root == NULL) return;
+    postOrderrecurrceive(root->left);
+    postOrderrecurrceive(root->right);
+    printf("%d ",root->data);
+}
 void preOrder(BinarySearchTree* root){
     preOrderrecurrceive(root->node);
 }
 void inOrder(BinarySearchTree* root){
     inOrderrecurrceive(root->node);
+}
+void postOrder(BinarySearchTree* root){
+    postOrderrecurrceive(root->node);
 }
 int main(){
     BinarySearchTree* b = init_BinarySearchTree();
@@ -161,12 +155,14 @@ int main(){
     printf("\n%s",(search(b,20)) ? "FOUND" : "NOT FOUND");
     printf("\n%s",(search(b,25)) ? "FOUND" : "NOT FOUND");
     printf("\n%s",(search(b,11)) ? "FOUND" : "NOT FOUND");
-    printf("\n%d",findMin(b));
+    printf("\n%d",findMin(b->node));
     printf("\n%d",findMax(b));
     printf("\nheight -- > %d ",findHeight(b->node));
-    printf("\nBinary tree node :");
+    printf("\nBinary tree node in pretOrder :");
     preOrder(b);
     printf("\nBinary tree node in sorted :");
     inOrder(b);
+    printf("\nBinary tree node in postOrder :");
+    postOrder(b);
     return 0;
 }
