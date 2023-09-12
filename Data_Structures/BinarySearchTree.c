@@ -71,7 +71,7 @@ int search(BinarySearchTree* root, int data){
         else if(current->data == data){
             return 1;
         }
-        else if(current->data < data){
+        else if(current->data > data){
             current = current->left;
         }
         else{
@@ -119,21 +119,54 @@ int findMax(BinarySearchTree* root){
     
     return current->data;
 }
+int max(int l, int r){
+    return (l > r)? l : r;
+}
+int findHeight(Node* root){
+    Node* current = root;
+    if(current == NULL){
+        return -1;
+    }
+    return max(findHeight(current->left),findHeight(current->right))+1;
+}
+void inOrderrecurrceive(Node* root){
+    if(root == NULL) return;
+   
+    inOrderrecurrceive(root->left);
+    printf("%d ",root->data);
+    inOrderrecurrceive(root->right);
+}
+void preOrderrecurrceive(Node* root){
+    if(root == NULL) return;
+    printf("%d ",root->data);
+    preOrderrecurrceive(root->left);
+    preOrderrecurrceive(root->right);
+}
+void preOrder(BinarySearchTree* root){
+    preOrderrecurrceive(root->node);
+}
+void inOrder(BinarySearchTree* root){
+    inOrderrecurrceive(root->node);
+}
 int main(){
     BinarySearchTree* b = init_BinarySearchTree();
     insert(b,15);
     insert(b,10);
     insert(b,20);
     insert(b,25);
-    insert(b,14);insert(b,8);
+    insert(b,14);
+    insert(b,8);
     printf("\n%s",(search(b,15)) ? "FOUND" : "NOT FOUND");
     printf("\n%s",(search(b,10)) ? "FOUND" : "NOT FOUND");
     printf("\n%s",(search(b,20)) ? "FOUND" : "NOT FOUND");
     printf("\n%s",(search(b,25)) ? "FOUND" : "NOT FOUND");
     printf("\n%s",(search(b,11)) ? "FOUND" : "NOT FOUND");
     printf("\n%d",findMin(b));
-    //printf("\n%d",findMin(b->node));
     printf("\n%d",findMax(b));
-    
+    printf("\nheight -- > %d ",findHeight(b->node));
+    printf("\nBinary tree node :");
+    preOrder(b);
+    printf("\nBinary tree node in sorted :");
+    inOrder(b);
     return 0;
 }
